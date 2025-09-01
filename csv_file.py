@@ -2,33 +2,69 @@
 """
 Created on Sat Aug 30 08:52:11 2025
 
-@author: P.Andise
+@author: Mahjoobe Nazari
+
+this is a program that read a csv file and calculate a total price of product 
+and then write it in a new csv file
+
 """
 
 import csv
 
+
 # read csv file
 
-my_file = open("products.csv")
-my_cvs = csv.DictReader(my_file)
-# my_file.close()
+my_file = open("C:\\Users\\P.Andise\\tmp\\products.csv", encoding='utf-8')
+my_csv = csv.DictReader(my_file)
+
+
 process_data=[]
+data ={} 
 
-for i in 
+for row in my_csv :
+    product = row["Product Name"]
+    price = float(row["Price"])
+    quantity = int(row["Quantity"])
+    total = price * quantity         # calculate a total price
+    
+    process_data.append({"Products":product , "Price": price , "Quantity" : quantity , "Total" : total})
 
-my_write_file = open("products2.csv" ,mode="w", newline='')
-csv_write = csv.writer(my_write_file, delimiter='|' )
+#print(process_data) 
 
-csv_write.writerow("product Name", "Price" , "Quantity" , "Total Price")
+# convert new data from list to dictionary
 
-total=[]
+prod=[]
+pric=[]
+quan=[]
+tot=[]
 
-for i in range(1,5) :
-    my_cvs.
-    total=i[1]*i[2]
-  
-    for j in range(1,5):
-        total=int(mylist[1])*int(mylist[2])
-  
-print(total)    
+# print(process_data[0].keys())
+for row in process_data:
+    
+    prod.append(row["Products"])
+    pric.append(row["Price"])
+    quan.append(row["Quantity"])
+    tot.append(row["Total"])
+
+#print(prod,pric,quan,tot)
+
+data.update({ "Products": prod , "Price": pric , "Quantity" : quan , "Total" : tot})
+
+print(data)    
+ 
+# open new csv file to write
+
+my_write_file = open("C:\\Users\\P.Andise\\tmp\\products2.csv" ,mode="w", newline='')
+
+Title = ["Products", "Price", "Quantity", "Total"]
+
+csv_write = csv.DictWriter(my_write_file, delimiter='|', fieldnames=Title)
+
+csv_write.writeheader()
+csv_write.writerow(data)
+
+my_file.close()
+my_write_file.close()
+
+print("writing new csv file is don successfully")    
 
