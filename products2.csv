@@ -1,0 +1,2 @@
+Products|Price|Quantity|Total
+['Apple', 'Banana', 'Orange', 'Grapes']|[1500.0, 1000.0, 1200.0, 2000.0]|[5, 10, 3, 2]|[7500.0, 10000.0, 3600.0, 4000.0]
